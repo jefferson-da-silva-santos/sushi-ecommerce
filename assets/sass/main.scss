@@ -1,0 +1,1170 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:wght@500;600&family=Poppins:wght@400;500&display=swap");
+
+$max-width: 1024px;
+// Váriaveis Cores
+$first-color: hsl(19, 64%, 54%);
+$first-color-alt: hsl(19, 64%, 52%);
+$title-color: hsl(19, 16%, 15%);
+$text-color: hsl(19, 16%, 35%);
+$text-color-light: hsl(19, 8%, 55%);
+$body-color: hsl(19, 100%, 96%);
+$container-color: hsl(19, 100%, 97%);
+// Váriaveis Cores
+// $first-color: hsl(19, 64%, 58%);
+// $first-color-alt: hsl(19, 64%, 54%);
+// $title-color: hsl(19, 24%, 85%);
+// $text-color: hsl(19, 16%, 65%);
+// $body-color: hsl(19, 12%, 8%);
+// $container-color: hsl(19, 10%, 10%);
+//Variáveis fontes
+$body-font: "Poppins", sans-serif;
+$title-font: "Lora", serif;
+$subtitle-font: "Dancing Script", cursive;
+$biggest-font-size: 2.25rem;
+$h1-font-size: 1.5rem;
+$h2-font-size: 1.25rem;
+$h3-font-size: 1rem;
+$normal-font-size: 0.938rem;
+$small-font-size: 0.813rem;
+$smaller-font-size: 0.75rem;
+$min-height: 100dvh;
+// Font weight
+$font-medium: 500;
+$font-semi-bold: 600;
+
+@mixin flexbox($display, $direction, $gap, $justify, $align) {
+  display: $display;
+  flex-direction: $direction;
+  gap: $gap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin group-styles($position, $overflow, $min-height) {
+  position: $position;
+  overflow: $overflow;
+  min-height: $min-height;
+}
+
+@mixin grid-layout(
+  $grid_template_columns,
+  $grid_template_rows,
+  $column_gap,
+  $row_gap
+) {
+  display: grid;
+  grid-template-columns: $grid_template_columns;
+  grid-template-rows: $grid_template_rows;
+  column-gap: $column_gap;
+  row-gap: $row_gap;
+}
+
+@mixin arte(
+  $position,
+  $width,
+  $transform,
+  $opacity,
+  $left,
+  $rigth,
+  $bottom,
+  $top
+) {
+  position: $position;
+  width: $width;
+  transform: $transform;
+  opacity: $opacity;
+  left: $left;
+  right: $rigth;
+  bottom: $bottom;
+  top: $top;
+}
+
+%padrao-sessoes {
+  width: 95%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+%botao {
+  position: relative;
+  text-decoration: none;
+  background-color: $first-color;
+  color: white;
+  padding: 0.3em 2.2em;
+  width: max-content;
+  border-radius: 50px;
+  @include flexbox(flex, row, 3px, center, center);
+  margin-top: 1.5em;
+  cursor: pointer;
+
+  i {
+    font-size: 30px;
+    margin-top: 3px;
+    transition: all .4s ease;
+  }
+
+  &:hover {
+    i {
+      transform: translateX(4px) scale(120%);
+    }
+  }
+}
+
+%titulo-primario {
+  font-family: $title-font;
+  color: $title-color;
+}
+
+%titulos {
+  @extend %titulo-primario;
+  font-size: 2.8em;
+}
+
+%suptitle {
+  font-family: $subtitle-font;
+  color: $first-color;
+  font-size: 1.7em;
+}
+
+* {
+  font-family: $body-font;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+%logo {
+  text-decoration: none;
+  font-size: 1.1em;
+  color: $title-color;
+  font-family: $title-font;
+  font-weight: 700;
+  font-size: 1.2em;
+  @include flexbox(flex, row, 8px, flex-start, stretch);
+}
+
+@mixin media-query($tamanho) {
+  @media screen and (max-width: $tamanho) {
+    @content;
+  }
+}
+
+body {
+  background-color: $body-color;
+}
+
+// Estilos CABEÇALIO E NAV
+
+.groupHeader {
+  @include group-styles(relative, hidden, $min-height);
+  @include flexbox(flex, row, 0, center, center);
+
+  .arte-1 {
+    @include arte(absolute, 100px, rotate(80deg), 0.15, 0, auto, auto, 10%);
+  }
+
+  .arte-2 {
+    @include arte(absolute, 120px, translateX(27px), 0.15, auto, 0, auto, 60%);
+  }
+
+  .groupNav {
+    position: fixed;
+    top: 0;
+    background-color: $body-color;
+    width: 100%;
+    z-index: 900;
+    transition: box-shadow 0.5s ease;
+  }
+
+  .nav {
+    @extend %padrao-sessoes;
+    padding: 1.5em 0;
+    @include flexbox(flex, row, 0, space-between, center);
+
+    &__logo {
+      @extend %logo;
+      &__img {
+        width: 25px;
+      }
+    }
+
+    &__menu {
+      cursor: pointer;
+      @include flexbox(none, column, 7px, space-between, stretch);
+      background-color: transparent;
+      width: 40px;
+      height: 30px;
+
+      &__line {
+        background-color: $title-color;
+        height: 100%;
+        border-radius: 3px;
+        transition: all 0.5s ease;
+      }
+    }
+
+    &__list-menu {
+      list-style-type: none;
+      @include flexbox(flex, row, 3em, flex-start, stretch);
+
+      &__item {
+        &__item {
+          text-decoration: none;
+          color: $text-color;
+          font-weight: 500;
+          transition: all 0.5s ease;
+
+          &:hover {
+            color: $first-color;
+          }
+        }
+      }
+    }
+  }
+
+  .header {
+    padding-top: 5em;
+    @extend %padrao-sessoes;
+    @include grid-layout(1fr 1fr, none, 0, 0);
+
+    &__group-primary {
+      @include flexbox(flex, column, 1em, flex-start, stretch);
+
+      &__title {
+        @extend %titulo-primario;
+        font-weight: 400;
+        font-size: 3.5em;
+        max-width: 8em;
+
+        &__img {
+          width: 55px;
+        }
+      }
+
+      &__text {
+        max-width: 20em;
+        color: $text-color;
+      }
+
+      &__btn {
+        @extend %botao;
+      }
+    }
+
+    &__group-secundary {
+      position: relative;
+      @include flexbox(flex, row, 0, flex-end, center);
+
+      &__img {
+        position: absolute;
+        max-width: 36em;
+      }
+    }
+  }
+}
+
+// Estilos ABOUT
+
+.groupAbout {
+  @include group-styles(relative, hidden, $min-height);
+  @include flexbox(flex, row, 0, center, center);
+
+  .arte-3 {
+    @include arte(
+      absolute,
+      130px,
+      rotate(-19deg) translateX(1px),
+      0.15,
+      auto,
+      0,
+      auto,
+      20%
+    );
+  }
+
+  .about {
+    @extend %padrao-sessoes;
+    @include grid-layout(1fr 1fr, none, 5.5em, 0);
+
+    &__group-primary {
+      @include flexbox(flex, row, 0, center, center);
+      &__img {
+        max-width: 27em;
+      }
+    }
+
+    &__group-secundary {
+      @include flexbox(flex, column, 1em, flex-start, stretch);
+
+      &__suptitle {
+        @extend %suptitle;
+      }
+
+      &__title {
+        @extend %titulos;
+        width: 9em;
+
+        &__img {
+          width: 45px;
+        }
+      }
+
+      &__text {
+        width: 24em;
+        margin-top: 1em;
+        color: $text-color;
+      }
+    }
+  }
+}
+
+.groupPopular {
+  @include group-styles(static, hidden, $min-height);
+  @include flexbox(flex, row, 0, center, center);
+
+  .popular {
+    @include grid-layout(none, 10em 1fr, 0, 0);
+    @extend %padrao-sessoes;
+
+    &__group-primary {
+      text-align: center;
+      @include flexbox(flex, column, 0, center, center);
+
+      &__suptitle {
+        @extend %suptitle;
+      }
+
+      &__title {
+        @extend %titulos;
+      }
+    }
+
+    &__group-secundary {
+      @include grid-layout(repeat(3, 1fr), none, 2em, 0);
+      padding: 4em 0 3em 0;
+
+      &__card-food {
+        background-color: $container-color;
+        box-shadow: 0px 8px 20px hsla(21, 44%, 60%, 0.186);
+        max-width: 18.5em;
+        height: 17.5em;
+        padding: 1em 1em;
+        @include grid-layout(none, 1fr 2fr, 0, 0);
+        border-radius: 25px;
+
+        &__img {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &__img {
+            position: absolute;
+            width: 15em;
+            bottom: -3px;
+            transition: all .3s ease-in-out;
+          }
+        }
+
+        &__texts {
+          position: relative;
+          padding: 25px 0 10px 0;
+          @include flexbox(flex, column, 6px, flex-start, center);
+
+          &__title {
+            font-family: $title-font;
+            font-size: 1.35em;
+            color: $title-color;
+          }
+
+          &__description {
+            color: $text-color;
+            font-size: 0.95em;
+          }
+
+          &__preco {
+            color: $first-color;
+            font-weight: 500;
+            font-size: 1.38em;
+            margin-top: 17px;
+          }
+
+          &__btn {
+            position: absolute;
+            background-color: $first-color;
+            color: white;
+            font-size: 23px;
+            width: 37px;
+            height: 37px;
+            @include flexbox(flex, row, 0, center, center);
+            border-radius: 50%;
+            right: 0;
+            bottom: 30px;
+          }
+        }
+
+        &:hover {
+          .popular__group-secundary__card-food__img__img {
+            transform: translateY(-5px)
+          }
+        }
+      }
+    }
+  }
+}
+
+.groupRecently {
+  @include group-styles(relative, hidden, 0);
+
+  .arte-4 {
+    @include arte(
+      absolute,
+      100px,
+      rotate(17deg) translateX(-30px),
+      0.15,
+      0,
+      auto,
+      auto,
+      27%
+    );
+  }
+
+  .arte-5 {
+    @include arte(
+      absolute,
+      80px,
+      rotate(-36deg) translateX(22px),
+      0.15,
+      auto,
+      0,
+      auto,
+      10%
+    );
+  }
+
+  .recently {
+    @include grid-layout(none, 1fr 1fr, 0, 0);
+    @extend %padrao-sessoes;
+
+    .recently-primary {
+      min-height: $min-height;
+      @include grid-layout(1fr 1fr, none, 0, 0);
+
+      &__group-texts {
+        @include flexbox(flex, column, 2em, center, stretch);
+
+        &__suptitle {
+          @extend %suptitle;
+        }
+
+        &__title {
+          @extend %titulos;
+          line-height: 12px;
+          // @include flexbox(flex, row, 0, center, stretch);
+
+          &__img {
+            width: 34px;
+            margin-left: 10px;
+            transform: rotate(30deg);
+          }
+        }
+
+        &__text {
+          color: $text-color;
+        }
+
+        &__text {
+          width: 24em;
+        }
+
+        &__btn {
+          @extend %botao;
+        }
+      }
+
+      &__group-img {
+        @include flexbox(flex, row, 0, center, center);
+        &__img {
+          max-width: 30em;
+        }
+      }
+    }
+
+    .recently-secundary {
+      min-height: 50vh;
+      @include flexbox(flex, row, 0, center, center);
+      @extend %padrao-sessoes;
+
+      &__form {
+        position: relative;
+        @include grid-layout(1fr 1fr, none, 3em, 0);
+        background-color: $title-color;
+        width: 100%;
+        padding: 3em 5em;
+        border-radius: 50px;
+
+        .arte-6 {
+          @include arte(
+            absolute,
+            40px,
+            rotate(45deg),
+            1,
+            auto,
+            63px,
+            -38px,
+            auto
+          );
+        }
+
+        &__group-img {
+          @include flexbox(flex, row, 0, center, center);
+          &__img {
+            max-width: 20em;
+          }
+        }
+
+        &__group-texts {
+          @include flexbox(flex, column, 0, flex-start, stretch);
+
+          &__suptitle {
+            @extend %suptitle;
+          }
+
+          &__title {
+            @extend %titulos;
+            color: white;
+            margin-top: 10px;
+            max-width: 8em;
+            font-size: 2.5em;
+          }
+
+          &__group-input {
+            background-color: white;
+            padding: 10px;
+            border-radius: 50px;
+            @include flexbox(flex, row, 10px, space-between, center);
+            margin-top: 2em;
+
+            &__input {
+              border-radius: 50px;
+              border: none;
+              font-size: 1em;
+              padding: 10px;
+              width: 100%;
+
+              &:focus {
+                outline: none;
+              }
+            }
+
+            &__btn {
+              @extend %botao;
+              padding: 0.7em 30px;
+              margin-top: 0;
+
+              i {
+                font-size: 20px;
+                margin-top: 3px;
+                margin-left: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  overflow: hidden;
+  position: relative;
+  @extend %padrao-sessoes;
+
+  .arte-7 {
+    @include arte(absolute, 28px, rotate(45deg), 1, 10%, auto, 20%, auto);
+  }
+
+  .arte-8 {
+    @include arte(absolute, 31px, rotate(-38deg), 1, auto, 25%, 25%, auto);
+  }
+
+  .arte-9 {
+    @include arte(absolute, 130px, translateY(30px), 0.15, 50%, auto, 0, auto);
+  }
+
+  &__container {
+    @extend %padrao-sessoes;
+    @include grid-layout(2fr 1fr 1fr 1fr 1fr, 3fr 4em, 4em, 0);
+    min-height: 60vh;
+    margin-top: 5em;
+
+    &__group-1 {
+      @include flexbox(flex, column, 1em, flex-start, stretch);
+
+      &__logo {
+        @extend %logo;
+
+        &__img {
+          width: 25px;
+        }
+      }
+    }
+
+    &__group-6 {
+      grid-row: 2 / 2;
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@for $i from 1 through 6 {
+  .footer__container__group-#{$i} {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+
+    &__title {
+      font-weight: 500;
+      color: $title-color;
+    }
+
+    p {
+      color: $text-color;
+      font-size: 0.9em;
+      width: 15em;
+    }
+    &__list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      li {
+        color: $text-color;
+        font-size: 0.9em;
+      }
+
+      a {
+        text-decoration: none;
+        color: $text-color;
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  @if $i == 5 {
+    .footer__container__group-#{$i} {
+      &__group-social {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 7em;
+
+        i {
+          font-size: 1.3em;
+          color: $first-color-alt;
+        }
+      }
+    }
+  }
+
+  @if $i == 6 {
+    .footer__container__group-#{$i} {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: $text-color;
+
+      &__group-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        img {
+          width: 30px;
+        }
+      }
+    }
+  }
+}
+
+@include media-query(980px) {
+  //Header
+  .groupHeader .header {
+    @include grid-layout(1fr, 1fr 1fr, 0, 1.5em);
+
+    &__group-secundary {
+      grid-row: 1 / 1;
+      justify-content: center;
+
+      &__img {
+        max-width: 20em;
+      }
+    }
+
+    &__group-primary {
+      grid-row: 2 / 2;
+      text-align: center;
+      align-items: center;
+
+      &__title {
+        font-size: 2.5em;
+
+        &__img {
+          width: 37px;
+        }
+      }
+      &__text {
+        max-width: 28em;
+        color: hsl(19, 16%, 35%);
+      }
+    }
+  }
+  //About
+  .groupAbout {
+    .arte-3 {
+      width: 120px;
+      top: 45%;
+    }
+
+    .about {
+      @include grid-layout(1fr, 1fr 1fr, 0, 2em);
+
+      .about__group-secundary {
+        text-align: center;
+        align-items: center;
+
+        &__title {
+          font-size: 2.2em;
+
+          &__img {
+            width: 40px;
+          }
+        }
+      }
+
+      &__group-primary {
+        grid-row: 2 / 2;
+
+        &__img {
+          max-width: 20em;
+        }
+      }
+    }
+  }
+
+  .groupPopular {
+    .popular {
+      &__group-primary {
+        &__title {
+          font-size: 2.2em;
+        }
+      }
+      &__group-secundary {
+        @include grid-layout(1fr, 1fr 1fr 1fr, 0, 5em);
+
+        &__card-food {
+          margin: auto;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .groupRecently {
+    .recently {
+      .recently-primary {
+        @include grid-layout(1fr, 1fr 1fr, 0, 0);
+
+        &__group-texts {
+          align-items: center;
+          text-align: center;
+          gap: 1.2em;
+
+          &__title {
+            position: relative;
+            line-height: normal;
+            font-size: 2.2em;
+
+            &__img {
+              position: absolute;
+              margin-left: 30px;
+            }
+          }
+
+          &__text {
+            max-width: 22em;
+          }
+        }
+
+        &__group-img {
+          &__img {
+            max-width: 22em;
+          }
+        }
+      }
+
+      .recently-secundary {
+        &__form {
+          overflow: hidden;
+          position: relative;
+          @include grid-layout(1fr, 1fr, 0, 0);
+          &__group-img {
+            &__img {
+              max-width: 21em;
+              position: absolute;
+              left: -171px;
+              top: -116px;
+            }
+          }
+          &__group-texts {
+            text-align: center;
+            align-items: center;
+
+            &__title {
+              font-size: 2.2em;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer__container {
+    @include grid-layout(1fr 1fr, repeat(4, 1fr), 2em, 2em);
+
+    &__group-1 {
+      grid-column: 1 / -1;
+    }
+
+    &__group-6 {
+      grid-row: 4 / 4;
+    }
+  }
+}
+
+@include media-query(884px) {
+  .groupHeader .nav__menu {
+    display: flex;
+    z-index: 2;
+  }
+
+  .groupHeader .nav__list-menu {
+    position: fixed;
+    @include flexbox(none, column, 1em, center, center);
+    background-color: $body-color;
+    padding: 6em 0 4em 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px 0px 10px hsl(19, 27%, 69%);
+    z-index: 1;
+    animation: menuFalling 0.5s ease 0s 1 normal forwards;
+  }
+
+  @keyframes menuFalling {
+    0% {
+      top: -100%;
+    }
+    100% {
+      top: 0;
+    }
+  }
+}
+
+@include media-query(490px) {
+  //Header
+  .groupHeader .header {
+    &__group-secundary {
+      &__img {
+        max-width: 15em;
+      }
+    }
+
+    &__group-primary {
+      &__title {
+        font-size: 2em;
+
+        &__img {
+          width: 30px;
+        }
+      }
+
+      &__text {
+        font-size: 0.8em;
+      }
+
+      &__btn {
+        max-width: 14em;
+      }
+    }
+  }
+  //About
+  .groupAbout {
+    .about {
+      .about__group-secundary {
+        &__suptitle {
+          font-size: 1.35em;
+        }
+        &__title {
+          font-size: 1.8em;
+
+          &__img {
+            width: 35px;
+          }
+        }
+
+        &__text {
+          font-size: 0.8em;
+        }
+      }
+
+      &__group-primary {
+        &__img {
+          max-width: 14em;
+        }
+      }
+    }
+  }
+
+  .groupPopular {
+    .popular {
+      &__group-primary {
+        &__suptitle {
+          font-size: 1.35em;
+        }
+        &__title {
+          font-size: 1.8em;
+        }
+      }
+      &__group-secundary {
+        @include grid-layout(1fr, 1fr 1fr 1fr, 0, 5em);
+
+        &__card-food {
+          margin: auto;
+          max-width: 17em;
+          height: 15em;
+
+          &__img {
+            &__img {
+              max-width: 12em;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .groupRecently {
+    .recently {
+      .recently-primary {
+        &__group-texts {
+          &__suptitle {
+            font-size: 1.35em;
+          }
+          &__title {
+            font-size: 1.8em;
+
+            &__img {
+              position: absolute;
+              margin-left: 10px;
+              width: 20px;
+            }
+          }
+
+          &__text {
+            max-width: 22em;
+            font-size: 0.8em;
+          }
+
+          &__btn {
+            max-width: 14em;
+          }
+        }
+
+        &__group-img {
+          &__img {
+            max-width: 18em;
+          }
+        }
+      }
+
+      .recently-secundary {
+        &__form {
+          padding: 2em;
+          &__group-img {
+            &__img {
+              max-width: 18em;
+              position: absolute;
+              left: -190px;
+              top: -130px;
+            }
+          }
+          &__group-texts {
+            &__suptitle {
+              font-size: 1.35em;
+            }
+            &__title {
+              font-size: 1.8em;
+            }
+
+            &__group-input {
+              &__input {
+                width: 100%;
+              }
+              &__btn {
+                width: 8em;
+                font-size: 0.8em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer__container {
+    @include grid-layout(1fr 1fr, repeat(4, 1fr), 2em, 2em);
+
+    &__group-1 {
+      grid-column: 1 / -1;
+    }
+
+    &__group-6 {
+      grid-row: 4 / 4;
+    }
+  }
+}
+
+/*=======================| ANIMAÇÕES HEADER |=========================*/
+
+//hide-header-1
+.hide-header-1 {
+  opacity: 0;
+}
+
+.show-header-1 {
+  animation: falling 1s ease-in 0s 1 normal forwards;
+}
+
+//hide-header-2
+.hide-header-2 {
+  opacity: 0;
+}
+
+.show-header-2 {
+  animation: rising 1s ease-in 0s 1 normal forwards;
+}
+
+@keyframes falling {
+  0% {
+    opacity: 0;
+    transform: translateY(30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rising {
+  0% {
+    opacity: 0;
+    transform: translateY(-30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*=======================| ANIMAÇÕES ABOUT |=========================*/
+
+//hide-about-1
+.hide-about-1 {
+  opacity: 0;
+}
+.show-about-1 {
+  animation: rightLeft 1s ease-in 0s 1 normal forwards;
+}
+
+.hide-about-2 {
+  opacity: 0;
+}
+.show-about-2 {
+  animation: leftRight 1s ease-in 0s 1 normal forwards;
+}
+
+@keyframes rightLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(15%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes leftRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-15%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/*=======================| ANIMAÇÕES POPULAR |=========================*/
+
+.hide-card-food-1 {
+  opacity: 0;
+}
+.show-card-food-1 {
+  animation: rising 1s ease-in-out 0s 1 normal forwards;
+}
+
+.hide-card-food-2 {
+  opacity: 0;
+}
+.show-card-food-2 {
+  animation: rising 1s ease-in-out .2s 1 normal forwards;
+}
+
+.hide-card-food-3 {
+  opacity: 0;
+}
+.show-card-food-3 {
+  animation: rising 1s ease-in-out .4s 1 normal forwards;
+}
+
+
+/*=======================| ANIMAÇÕES RECENTLY |=========================*/
+
+//hide-recently-1
+.hide-recently-1 {
+  opacity: 0;
+}
+.show-recently-1 {
+  animation: leftRight 1s ease-in 0s 1 normal forwards;
+}
+
+
+.hide-recently-2 {
+  opacity: 0;
+}
+.show-recently-2 {
+  animation: rightLeft 1s ease-in 0s 1 normal forwards;
+}
+
+/*=======================| ANIMAÇÕES RECENTLY |=========================*/
+
+.hide-footer {
+  opacity: 0;
+}
+.show-footer {
+  animation: rising 0.5s ease-in 0s 1 normal forwards;
+}
