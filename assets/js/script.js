@@ -1,8 +1,10 @@
 let menuVisible = false;
+let themeDark = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   const menuList = getElement('.nav__list-menu');
   const btnMenu = getElement('.nav__menu');
+  const btnThema = document.getElementById('btn-theme');
 
   enableDarkTheme();
 
@@ -49,9 +51,49 @@ document.addEventListener('DOMContentLoaded', () => {
   criarObservacao('.hide-recently-1', 'show-recently-1');
   criarObservacao('.hide-recently-2', 'show-recently-2');
   //Chamando as funções de observação para o footer
-  criarObservacao('.hide-footer', 'show-footer')
+  criarObservacao('.hide-footer', 'show-footer');
+
+  // Alterar tema
+  btnThema.addEventListener('click', event => {
+    event.preventDefault();
+    alterTheme();
+  });
   
 });
+
+//Função para alterar o tema
+function alterTheme() {
+  document.body.style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
+  getElement('.groupNav').style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
+  getElement('.recently-secundary__form').style.backgroundColor = themeDark ? '#2c2420' : '#151511';
+  getElement('.recently-secundary__form').style.boxShadow = themeDark ? 'none' : '0px 0px 20px #00000052';
+  getElement('.footer__container__group-1__logo').style.color = themeDark ? '#2c2420' : '#e2d5d0';
+  getElement('.recently-secundary__form__group-texts__group-input').style.backgroundColor = themeDark ? '#ffffff' : '#12100e';
+  
+  getElement('h2', true).forEach(e => {
+    e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
+  });
+  getElement('h1', true).forEach(e => {
+    e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
+  });
+  getElement('.footer-title', true).forEach(e => {
+    e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
+  });
+  getElement('h3', true).forEach(e => {
+    e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
+  });
+  getElement('a', true).forEach(e => {
+    e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
+  });
+  getElement('p', true).forEach(e => {
+    e.style.color = themeDark ? '#68544b' : '#b4a197';
+  });
+  getElement('.popular__group-secundary__card-food', true).forEach(e => {
+    e.style.backgroundColor = themeDark ? '#fff5f0' : '#151511';
+    e.style.boxShadow = themeDark ? '0px 8px 20px hsla(21, 44%, 60%, 0.186)' : '0px 8px 20px hsl(0deg 0% 0% / 60%)';
+  });
+  themeDark = toggleVariable(themeDark);
+}
 
 //Função para selecionar elementos do DOM
 function getElement(classElement, multiple = false) {
