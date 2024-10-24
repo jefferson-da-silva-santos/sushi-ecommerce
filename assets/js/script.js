@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //Função para alterar o tema
 function alterTheme() {
   document.body.style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
-  getElement('.nav__list-menu').style.boxShadow = themeDark ? '0px 0px 10px hsl(19, 27%, 69%)' : 'hsl(19deg 64% 54% / 60%) 0px 0px 18px';
+  // getElement('.nav__list-menu').style.boxShadow = (themeDark && window.innerWidth <= 884) ? '0px 0px 10px hsl(19, 27%, 69%)' : 'hsl(19deg 64% 54% / 60%) 0px 0px 18px';
   getElement('.nav__list-menu').style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
   getElement('.groupNav').style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
   getElement('.recently-secundary__form').style.backgroundColor = themeDark ? '#2c2420' : '#151511';
@@ -84,9 +84,7 @@ function alterTheme() {
   getElement('h3', true).forEach(e => {
     e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
   });
-  // getElement('a', true).forEach(e => {
-  //   e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
-  // });
+
   getElement('.nav__list-menu__item__item', true).forEach(e => {
     e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
   });
