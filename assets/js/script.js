@@ -84,9 +84,13 @@ function alterTheme() {
   getElement('h3', true).forEach(e => {
     e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
   });
-  getElement('a', true).forEach(e => {
+  // getElement('a', true).forEach(e => {
+  //   e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
+  // });
+  getElement('.nav__list-menu__item__item', true).forEach(e => {
     e.style.color = themeDark ? '#2c2420' : '#e2d5d0';
   });
+  getElement('.recently-secundary__form__group-texts__title').style.color = themeDark ? 'white' : 'white';
   getElement('p', true).forEach(e => {
     e.style.color = themeDark ? '#68544b' : '#b4a197';
   });
