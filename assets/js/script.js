@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
 //Função para alterar o tema
 function alterTheme() {
   document.body.style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
+  getElement('.nav__list-menu').style.boxShadow = themeDark ? '0px 0px 10px hsl(19, 27%, 69%)' : 'hsl(19deg 64% 54% / 60%) 0px 0px 18px';
+  getElement('.nav__list-menu').style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
   getElement('.groupNav').style.backgroundColor = themeDark ? '#fff1eb' : '#12100e';
   getElement('.recently-secundary__form').style.backgroundColor = themeDark ? '#2c2420' : '#151511';
   getElement('.recently-secundary__form').style.boxShadow = themeDark ? 'none' : '0px 0px 20px #00000052';
@@ -108,7 +110,7 @@ function toggleVariable(variable) {
 //Função responsável por mudar a cor do botão de abrir menu
 function toggleColorBtnMenu(list) {
   list.forEach(line => {
-    line.style.backgroundColor = menuVisible ? 'hsl(19, 64%, 54%)' : 'hsl(19, 16%, 15%)';
+    line.style.backgroundColor = menuVisible ? 'hsl(19, 64%, 54%)' : '#53382c';
   });
 }
 
